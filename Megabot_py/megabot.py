@@ -2,6 +2,12 @@ from googlesearch import search
 import discord
 import logging
 
+# specify bot privledges
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+
 # logging data to discord.log folder
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -10,9 +16,11 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
     
 class Megabot(discord.Client):
+    @client.event
     async def on_ready(self):
         print('Logged on as', self.user)
 
+    @client.event
     async def on_message(self, message):
         msg = message.content
 
@@ -34,5 +42,6 @@ class Megabot(discord.Client):
             for q in search(query, tld="co.in", num=1, stop=1, pause=2):
                 await message.channel.send(q)
 
-client = Megabot()
-client.run('NTgzNzQzODg1MDQyNTE2MDAx.XPA0Fw.IpYNTkIKbYQuTETFu7SehwJS2zg') 
+if __name__ == '__main__':
+    client = Megabot()
+    client.run('6dea79aab77e8f3f86d572376a514c5ced7794ad5b6779378e0f1c16f764ff5c') 

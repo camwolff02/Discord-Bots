@@ -1,0 +1,6 @@
+*.txt
+*.json
+*.bat
+*.log
+__pycache__/
+env/
